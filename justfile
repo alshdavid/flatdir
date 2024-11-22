@@ -59,7 +59,7 @@ build:
   @rm -rf "{{out_dir_link}}"
   @mkdir -p "{{out_dir}}"
   cargo build {{profile_cargo}} {{target_cargo}}
-  @cp "./target/.cargo/{{target}}/{{profile}}/flatdir" "{{out_dir}}"
+  @cp "./target/.cargo/{{target}}/{{profile}}/slugfiles" "{{out_dir}}"
   @# ln -rs "{{out_dir}}" "{{out_dir_link}}"
 
 [windows]
@@ -68,18 +68,18 @@ build:
   @if (Test-Path {{out_dir_link}}) { Remove-Item -Recurse -Force {{out_dir_link}} | Out-Null }
   @New-Item -ItemType "directory" -Force -Path "{{out_dir}}"  | Out-Null
   cargo build {{profile_cargo}} {{target_cargo}}
-  Copy-Item ".\target\.cargo\{{target}}\{{profile}}\flatdir.exe" -Destination "{{out_dir}}" | Out-Null
+  Copy-Item ".\target\.cargo\{{target}}\{{profile}}\slugfiles.exe" -Destination "{{out_dir}}" | Out-Null
   @# New-Item -Path "{{out_dir}}" -ItemType SymbolicLink -Value "{{out_dir_link}}"
 
 [unix]
 run *ARGS:
   just build
-  {{out_dir}}/flatdir {{ARGS}}
+  {{out_dir}}/slugfiles {{ARGS}}
 
 [windows]
 run *ARGS:
   just build
-  {{out_dir}}/flatdir.exe {{ARGS}}
+  {{out_dir}}/slugfiles.exe {{ARGS}}
 
 test:
   cargo test

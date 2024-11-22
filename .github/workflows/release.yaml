@@ -50,7 +50,7 @@ jobs:
           arch: "${{ matrix.config.arch }}"
       - uses: actions/upload-artifact@v4
         with:
-          name: flatdir-${{ matrix.config.os }}-${{ matrix.config.arch }}
+          name: slugfiles-${{ matrix.config.os }}-${{ matrix.config.arch }}
           path: ${{ github.workspace }}/artifacts/**/*
           if-no-files-found: error
           retention-days: 1
@@ -72,11 +72,11 @@ jobs:
           gh release create $TAG  --draft --notes "Automatically built binaries"
           gh release edit $TAG --title "🚀 Latest"
 
-          gh release upload $TAG flatdir-linux-amd64/flatdir-linux-amd64.tar.gz
-          gh release upload $TAG flatdir-linux-arm64/flatdir-linux-arm64.tar.gz
-          gh release upload $TAG flatdir-macos-amd64/flatdir-macos-amd64.tar.gz
-          gh release upload $TAG flatdir-macos-arm64/flatdir-macos-arm64.tar.gz
-          gh release upload $TAG flatdir-windows-amd64/flatdir-windows-amd64.tar.gz
-          gh release upload $TAG flatdir-windows-arm64/flatdir-windows-arm64.tar.gz
+          gh release upload $TAG slugfiles-linux-amd64/slugfiles-linux-amd64.tar.gz
+          gh release upload $TAG slugfiles-linux-arm64/slugfiles-linux-arm64.tar.gz
+          gh release upload $TAG slugfiles-macos-amd64/slugfiles-macos-amd64.tar.gz
+          gh release upload $TAG slugfiles-macos-arm64/slugfiles-macos-arm64.tar.gz
+          gh release upload $TAG slugfiles-windows-amd64/slugfiles-windows-amd64.tar.gz
+          gh release upload $TAG slugfiles-windows-arm64/slugfiles-windows-arm64.tar.gz
           
           gh release edit $TAG --draft=false

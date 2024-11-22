@@ -133,9 +133,9 @@ runs:
         mkdir $ROOT_DIR/artifacts
         cd $ROOT_DIR/target/$JOB_NAME
 
-        mv release flatdir
-        tar -czvf flatdir-$JOB_NAME.tar.gz flatdir
-        mv flatdir-$JOB_NAME.tar.gz $ROOT_DIR/artifacts
+        mv release slugfiles
+        tar -czvf slugfiles-$JOB_NAME.tar.gz slugfiles
+        mv slugfiles-$JOB_NAME.tar.gz $ROOT_DIR/artifacts
 
         ls -l $ROOT_DIR/artifacts 
 
@@ -155,6 +155,6 @@ runs:
 
         echo "${env:RootPath}/target/${env:Job}"
         cd "${env:RootPath}/target/${env:Job}"
-        mv release flatdir
-        tar -czvf "flatdir-${env:Job}.tar.gz" flatdir
-        Move-Item "flatdir-${env:Job}.tar.gz" -Destination "${env:RootPath}/artifacts"
+        mv release slugfiles
+        tar -czvf "slugfiles-${env:Job}.tar.gz" slugfiles
+        Move-Item "slugfiles-${env:Job}.tar.gz" -Destination "${env:RootPath}/artifacts"
