@@ -35,7 +35,7 @@ jobs:
             arch: amd64
             runner: macos-latest
             run: rustup target add x86_64-apple-darwin
-            
+
           - name: 🍎 MacOS ARM64
             os: macos
             arch: arm64
@@ -67,7 +67,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: flatdir-${{ matrix.config.os }}-${{ matrix.config.arch }}
-          path: ${{ github.workspace }}/artifacts/**/*
+          path: ${{ github.workspace }}/target/${{ matrix.config.os }}-${{ matrix.config.arch }}/**/*
           if-no-files-found: error
           retention-days: 1
 
@@ -82,17 +82,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TAG="$(date -u +"v%Y.%m.%d.%H%M").${GITHUB_SHA::4}"
-          echo "Tag: ${TAG}"
+          set -e
 
-          gh release create $TAG  --draft --notes "Automatically built binaries"
-          gh release edit $TAG --title "🚀 Latest"
+          ls -l -a
+          # TAG="$(date -u +"v%Y.%m.%d.%H%M").${GITHUB_SHA::4}"
+          # echo "Tag: ${TAG}"
 
-          gh release upload $TAG flatdir-linux-amd64/flatdir-linux-amd64.tar.gz
-          gh release upload $TAG flatdir-linux-arm64/flatdir-linux-arm64.tar.gz
-          gh release upload $TAG flatdir-macos-amd64/flatdir-macos-amd64.tar.gz
-          gh release upload $TAG flatdir-macos-arm64/flatdir-macos-arm64.tar.gz
-          gh release upload $TAG flatdir-windows-amd64/flatdir-windows-amd64.tar.gz
-          gh release upload $TAG flatdir-windows-arm64/flatdir-windows-arm64.tar.gz
+          # gh release create $TAG  --draft --notes "Automatically built binaries"
+          # gh release edit $TAG --title "🚀 Latest"
+
+          # gh release upload $TAG flatdir-linux-amd64/flatdir-linux-amd64.tar.gz
+          # gh release upload $TAG flatdir-linux-arm64/flatdir-linux-arm64.tar.gz
+          # gh release upload $TAG flatdir-macos-amd64/flatdir-macos-amd64.tar.gz
+          # gh release upload $TAG flatdir-macos-arm64/flatdir-macos-arm64.tar.gz
+          # gh release upload $TAG flatdir-windows-amd64/flatdir-windows-amd64.tar.gz
+          # gh release upload $TAG flatdir-windows-arm64/flatdir-windows-arm64.tar.gz
           
-          gh release edit $TAG --draft=false
+          # gh release edit $TAG --draft=false
