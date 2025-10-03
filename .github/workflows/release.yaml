@@ -85,21 +85,58 @@ jobs:
         run: |
           set -e
 
-          ls -l -a
-          ls -l -a flatdir-linux-amd64
-          ls -l -a flatdir-linux-amd64/release
-          
-          # TAG="$(date -u +"v%Y.%m.%d.%H%M").${GITHUB_SHA::4}"
-          # echo "Tag: ${TAG}"
+          TAG="$(date -u +"v%Y.%m.%d.%H%M").${GITHUB_SHA::4}"
+          echo "Tag: ${TAG}"
 
-          # gh release create $TAG  --draft --notes "Automatically built binaries"
-          # gh release edit $TAG --title "🚀 Latest"
+          cd ${{ github.workspace }}/target/flatdir-linux-amd64/release
+          chmod +x ./*
+          tar -cJvf ../flatdir-linux-amd64.tar.xz ./*
+          tar -czvf ../flatdir-linux-amd64.tar.gz ./*
 
-          # gh release upload $TAG flatdir-linux-amd64/flatdir-linux-amd64.tar.gz
-          # gh release upload $TAG flatdir-linux-arm64/flatdir-linux-arm64.tar.gz
-          # gh release upload $TAG flatdir-macos-amd64/flatdir-macos-amd64.tar.gz
-          # gh release upload $TAG flatdir-macos-arm64/flatdir-macos-arm64.tar.gz
-          # gh release upload $TAG flatdir-windows-amd64/flatdir-windows-amd64.tar.gz
-          # gh release upload $TAG flatdir-windows-arm64/flatdir-windows-arm64.tar.gz
+          cd ${{ github.workspace }}/target/flatdir-linux-arm64/release
+          chmod +x ./*
+          tar -cJvf ../flatdir-linux-arm64.tar.xz ./*
+          tar -czvf ../flatdir-linux-arm64.tar.gz ./*
+
+          cd ${{ github.workspace }}/target/flatdir-macos-amd64/release
+          chmod +x ./*
+          tar -cJvf ../flatdir-macos-amd64.tar.xz ./*
+          tar -czvf ../flatdir-macos-amd64.tar.gz ./*
+
+          cd ${{ github.workspace }}/target/flatdir-macos-arm64/release
+          chmod +x ./*
+          tar -cJvf ../flatdir-macos-arm64.tar.xz ./*
+          tar -czvf ../flatdir-macos-arm64.tar.gz ./*
+
+          cd ${{ github.workspace }}/target/flatdir-windows-amd64/release
+          chmod +x ./*
+          tar -cJvf ../flatdir-windows-amd64.tar.xz ./*
+          tar -czvf ../flatdir-windows-amd64.tar.gz ./*
+
+          cd ${{ github.workspace }}/target/flatdir-windows-arm64/release
+          chmod +x ./*
+          tar -cJvf ../flatdir-windows-arm64.tar.xz ./*
+          tar -czvf ../flatdir-windows-arm64.tar.gz ./*
           
-          # gh release edit $TAG --draft=false
+          gh release create $TAG  --draft --notes "Automatically built binaries"
+          gh release edit $TAG --title "🚀 Latest"
+
+          gh release upload $TAG flatdir-linux-amd64/flatdir-linux-amd64.tar.gz
+          gh release upload $TAG flatdir-linux-amd64/flatdir-linux-amd64.tar.xz
+
+          gh release upload $TAG flatdir-linux-arm64/flatdir-linux-arm64.tar.gz
+          gh release upload $TAG flatdir-linux-arm64/flatdir-linux-arm64.tar.xz
+
+          gh release upload $TAG flatdir-macos-amd64/flatdir-macos-amd64.tar.gz
+          gh release upload $TAG flatdir-macos-amd64/flatdir-macos-amd64.tar.xz
+
+          gh release upload $TAG flatdir-macos-arm64/flatdir-macos-arm64.tar.gz
+          gh release upload $TAG flatdir-macos-arm64/flatdir-macos-arm64.tar.xz
+
+          gh release upload $TAG flatdir-windows-amd64/flatdir-windows-amd64.tar.gz
+          gh release upload $TAG flatdir-windows-amd64/flatdir-windows-amd64.tar.xz
+
+          gh release upload $TAG flatdir-windows-arm64/flatdir-windows-arm64.tar.gz
+          gh release upload $TAG flatdir-windows-arm64/flatdir-windows-arm64.tar.xz
+          
+          gh release edit $TAG --draft=false
