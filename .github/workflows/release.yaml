@@ -117,6 +117,8 @@ jobs:
           chmod +x ./*
           tar -cJvf ../flatdir-windows-arm64.tar.xz ./*
           tar -czvf ../flatdir-windows-arm64.tar.gz ./*
+
+          cd ${{ github.workspace }}
           
           gh release create $TAG  --draft --notes "Automatically built binaries"
           gh release edit $TAG --title "🚀 Latest"
