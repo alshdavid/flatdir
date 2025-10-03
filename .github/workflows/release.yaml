@@ -64,6 +64,7 @@ jobs:
         env: 
           os: "${{ matrix.config.os }}"
           arch: "${{ matrix.config.arch }}"
+          profile: release
       - uses: actions/upload-artifact@v4
         with:
           name: flatdir-${{ matrix.config.os }}-${{ matrix.config.arch }}
@@ -85,6 +86,7 @@ jobs:
           set -e
 
           ls -l -a
+          ls -l -a flatdir-linux-amd64
           # TAG="$(date -u +"v%Y.%m.%d.%H%M").${GITHUB_SHA::4}"
           # echo "Tag: ${TAG}"
 
