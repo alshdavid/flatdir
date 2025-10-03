@@ -88,32 +88,32 @@ jobs:
           TAG="$(date -u +"v%Y.%m.%d.%H%M").${GITHUB_SHA::4}"
           echo "Tag: ${TAG}"
 
-          cd ${{ github.workspace }}/target/flatdir-linux-amd64/release
+          cd ${{ github.workspace }}/flatdir-linux-amd64/release
           chmod +x ./*
           tar -cJvf ../flatdir-linux-amd64.tar.xz ./*
           tar -czvf ../flatdir-linux-amd64.tar.gz ./*
 
-          cd ${{ github.workspace }}/target/flatdir-linux-arm64/release
+          cd ${{ github.workspace }}/flatdir-linux-arm64/release
           chmod +x ./*
           tar -cJvf ../flatdir-linux-arm64.tar.xz ./*
           tar -czvf ../flatdir-linux-arm64.tar.gz ./*
 
-          cd ${{ github.workspace }}/target/flatdir-macos-amd64/release
+          cd ${{ github.workspace }}/flatdir-macos-amd64/release
           chmod +x ./*
           tar -cJvf ../flatdir-macos-amd64.tar.xz ./*
           tar -czvf ../flatdir-macos-amd64.tar.gz ./*
 
-          cd ${{ github.workspace }}/target/flatdir-macos-arm64/release
+          cd ${{ github.workspace }}/flatdir-macos-arm64/release
           chmod +x ./*
           tar -cJvf ../flatdir-macos-arm64.tar.xz ./*
           tar -czvf ../flatdir-macos-arm64.tar.gz ./*
 
-          cd ${{ github.workspace }}/target/flatdir-windows-amd64/release
+          cd ${{ github.workspace }}/flatdir-windows-amd64/release
           chmod +x ./*
           tar -cJvf ../flatdir-windows-amd64.tar.xz ./*
           tar -czvf ../flatdir-windows-amd64.tar.gz ./*
 
-          cd ${{ github.workspace }}/target/flatdir-windows-arm64/release
+          cd ${{ github.workspace }}/flatdir-windows-arm64/release
           chmod +x ./*
           tar -cJvf ../flatdir-windows-arm64.tar.xz ./*
           tar -czvf ../flatdir-windows-arm64.tar.gz ./*
