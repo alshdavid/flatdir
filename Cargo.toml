@@ -4,12 +4,12 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-clap = { version = "4.5.3", features = ["derive"] }
+clap = { version = "4.5.48", features = ["derive"] }
 normalize-path = "0.2.1"
 walkdir = "2.5.0"
-anyhow = "*"
-pathdiff = "*"
-slugify = "*"
+anyhow = "1.0.100"
+pathdiff = "0.2.3"
+slugify = "0.1.0"
 
 [profile.release]
 opt-level = 3
