@@ -4,6 +4,10 @@ concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
+defaults:
+  run:
+    shell: bash
+
 on: 
   push:
     branches:
@@ -18,34 +22,45 @@ jobs:
             os: linux
             arch: amd64
             runner: ubuntu-latest
+            run: rustup target add x86_64-unknown-linux-musl
+
           - name: 🐥 Linux ARM64
             os: linux
             arch: arm64
-            runner: ubuntu-latest
+            runner: ubuntu-latest-arm
+            run: rustup target add aarch64-unknown-linux-musl
+
           - name: 🍎 MacOS AMD64
             os: macos
             arch: amd64
-            runner: macos-13
+            runner: macos-latest
+
           - name: 🍎 MacOS ARM64
             os: macos
             arch: arm64
-            runner: macos-14
+            runner: macos-latest
+
           - name: 🟦 Windows AMD64
             os: windows
             arch: amd64
             runner: windows-latest
+
           - name: 🟦 Windows ARM64
             os: windows
             arch: arm64
             runner: windows-latest
+            run: rustup target add aarch64-pc-windows-msvc
+
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.runner }}
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup-just
-      - uses: ./.github/actions/setup-rust
-      - uses: ./.github/actions/build-bin
-        with: 
+      - run: eval $(curl -sSf sh.davidalsh.com/rust.sh | sh)
+      - run: eval $(curl -sSf sh.davidalsh.com/just.sh | sh)
+      - if: matrix.config.run
+        run: ${{ matrix.config.run }}
+      - run: just build
+        env: 
           os: "${{ matrix.config.os }}"
           arch: "${{ matrix.config.arch }}"
       - uses: actions/upload-artifact@v4
