@@ -68,8 +68,8 @@ jobs:
       - run: |
           set -e
           cd ${{ github.workspace }}/target/${{ matrix.config.os }}-${{ matrix.config.arch }}/release
-          tar -cJvf ../flatdir-${{ matrix.config.os }}-${{ matrix.config.arch }}.tar.xz /*
-          tar -czvf ../flatdir-${{ matrix.config.os }}-${{ matrix.config.arch }}.tar.gz /*
+          tar -cJvf ../flatdir-${{ matrix.config.os }}-${{ matrix.config.arch }}.tar.xz ./*
+          tar -czvf ../flatdir-${{ matrix.config.os }}-${{ matrix.config.arch }}.tar.gz ./*
       - uses: actions/upload-artifact@v4
         with:
           name: flatdir-${{ matrix.config.os }}-${{ matrix.config.arch }}
