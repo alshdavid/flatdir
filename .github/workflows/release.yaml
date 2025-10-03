@@ -65,6 +65,11 @@ jobs:
           os: "${{ matrix.config.os }}"
           arch: "${{ matrix.config.arch }}"
           profile: release
+      - run: |
+          set -e
+          cd target/${{ matrix.config.os }}-${{ matrix.config.arch }}/release
+          tar -xJvf ../flatdir-${{ matrix.config.os }}-${{ matrix.config.arch }}.tar.xz /*
+          tar -xcvf ../flatdir-${{ matrix.config.os }}-${{ matrix.config.arch }}.tar.gz /*
       - uses: actions/upload-artifact@v4
         with:
           name: flatdir-${{ matrix.config.os }}-${{ matrix.config.arch }}
