@@ -34,7 +34,8 @@ jobs:
             os: macos
             arch: amd64
             runner: macos-latest
-
+            run: rustup target add x86_64-apple-darwin
+            
           - name: 🍎 MacOS ARM64
             os: macos
             arch: arm64
